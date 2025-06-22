@@ -8,6 +8,8 @@ from keras.models import load_model
 telebot.apihelper.READ_TIMEOUT = 60
 telebot.apihelper.CONNECT_TIMEOUT = 10
 
+MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024
+
 bot = telebot.TeleBot('7880510286:AAE_aw_wEY__TCQPsOF9Cg9FSrx4v2Ou5VA')
 
 SUPPORTED_AUDIO_MIME_TYPES = {
@@ -24,6 +26,13 @@ user_states = set()
 
 def process_file(message, file_info):
     try:
+        if file_info.file_size > MAX_FILE_SIZE_BYTES:
+            bot.send_message(
+                message.chat.id,
+                "❗️ Файл слишком большой (> 20MB). Отправьте, пожалуйста, файл поменьше."
+            )
+            return
+        
         file = bot.get_file(file_info.file_id)
         downloaded = bot.download_file(file.file_path)
 
