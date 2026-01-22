@@ -10,7 +10,7 @@ telebot.apihelper.CONNECT_TIMEOUT = 10
 
 MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024
 
-bot = telebot.TeleBot('7880510286:AAE_aw_wEY__TCQPsOF9Cg9FSrx4v2Ou5VA')
+bot = telebot.TeleBot('8127889111:AAFjDqAzdsTDlKmmg3l8Tcta5Kte4ML58-k')
 
 SUPPORTED_AUDIO_MIME_TYPES = {
     'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/vnd.wave', 'audio/x-aiff',
