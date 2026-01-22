@@ -4,6 +4,8 @@ import tempfile
 import threading
 from predictor import predict_genre, get_audio_duration
 from keras.models import load_model
+import time
+import traceback
 
 telebot.apihelper.READ_TIMEOUT = 60
 telebot.apihelper.CONNECT_TIMEOUT = 10
@@ -95,4 +97,11 @@ def block_everything_else(message):
     else:
         bot.reply_to(message, "❗️Я принимаю только музыкальные файлы. Пожалуйста, отправьте аудио.")
         
-bot.polling()
+if __name__ == "__main__":
+    while True:
+        try:
+            bot.polling(non_stop=True, interval=0, timeout=20)
+        except Exception as e:
+            print(f"Polling error: {e}")
+            traceback.print_exc()
+            time.sleep(5)
