@@ -20,7 +20,8 @@ SUPPORTED_AUDIO_MIME_TYPES = {
 }
 
 MIN_DURATION_SECONDS = 4
-model = load_model("genre_classification_cnn.h5")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "genre_classification_cnn.h5")
+model = load_model(MODEL_PATH)
 
 user_states = set()
 
