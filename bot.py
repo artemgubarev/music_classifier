@@ -2,7 +2,7 @@ import telebot
 import os
 import tempfile
 import threading
-from predictor import predict_genre, get_audio_duration
+from src.predictor import predict_genre, get_audio_duration
 from keras.models import load_model
 import time
 import traceback
@@ -12,7 +12,8 @@ telebot.apihelper.CONNECT_TIMEOUT = 10
 
 MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024
 
-bot = telebot.TeleBot('8127889111:AAFjDqAzdsTDlKmmg3l8Tcta5Kte4ML58-k')
+TOKEN = os.getenv('TELEGRAM_TOKEN') 
+bot = telebot.TeleBot(TOKEN)
 
 SUPPORTED_AUDIO_MIME_TYPES = {
     'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/vnd.wave', 'audio/x-aiff',
@@ -22,7 +23,7 @@ SUPPORTED_AUDIO_MIME_TYPES = {
 }
 
 MIN_DURATION_SECONDS = 4
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "genre_classification_cnn.h5")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "src", "genre_classification_cnn.h5")
 model = load_model(MODEL_PATH)
 
 user_states = set()
